@@ -1,906 +1,372 @@
-<title>Prezovo</title>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prezovo — Intermediario Comercial B2B</title>
+<meta name="description" content="Encontramos clientes para tu empresa. Leads cualificados, introducciones de confianza, solo cobramos si entregamos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap">
 
 <style>
-/* ============================================================
-   PREZOVO — Intermediario Comercial B2B
-   Paleta: fondo blanco limpio, azul marino solo en nav/footer,
-   azul eléctrico solo en acentos y CTAs. Sin grandes bloques azules.
-   ============================================================ */
-
+/* ── TOKENS ─────────────────────────────────────────────── */
 :root {
-  --navy:       #1a2332;   /* solo nav + footer */
-  --electric:   #1a56db;   /* botones, links, acentos */
-  --electric-l: #2d65e8;   /* hover */
-
-  --bg:         #FFFFFF;
-  --bg-alt:     #F4F4F1;   /* secciones alternas */
-  --bg-dark:    #1C1F26;   /* sección "por qué" — casi negro, no azul */
-  --surface:    #FFFFFF;
-  --fg:         #0D0E0F;
-  --fg-mid:     #3A3A38;
-  --fg-muted:   #6E6E6A;
-  --border:     #E2E1DC;
-
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
+  --navy:     #1a2332;
+  --blue:     #1a56db;
+  --blue-h:   #2d65e8;
+  --bg:       #ffffff;
+  --bg2:      #f5f5f2;
+  --fg:       #0d0e0f;
+  --fg2:      #3a3a38;
+  --fg3:      #6e6e6a;
+  --border:   #e2e1dc;
+  --radius:   10px;
+  --ff-head:  'Playfair Display', Georgia, serif;
+  --ff-body:  'DM Sans', system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:       #0F0F0D;
-    --bg-alt:   #171715;
-    --bg-dark:  #111113;
-    --surface:  #1A1A18;
-    --fg:       #EEEEE8;
-    --fg-mid:   #B8B8B2;
-    --fg-muted: #787872;
-    --border:   #2A2A26;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg:       #0F0F0D;
-  --bg-alt:   #171715;
-  --bg-dark:  #111113;
-  --surface:  #1A1A18;
-  --fg:       #EEEEE8;
-  --fg-mid:   #B8B8B2;
-  --fg-muted: #787872;
-  --border:   #2A2A26;
-  color-scheme: dark;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; }
-
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
+/* ── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--ff-body); background: var(--bg); color: var(--fg); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
+ul { list-style: none; }
 
-/* ── NAV ─────────────────────────────────────────────── */
-nav {
-  position: sticky;
-  top: env(safe-area-inset-top, 0px);
-  z-index: 100;
+/* ── NAV ─────────────────────────────────────────────────── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
   background: var(--navy);
-  padding: 0 clamp(16px, 5vw, 72px);
-  height: 68px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 60px;
 }
-
-.nav-logo {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.375rem;
-  letter-spacing: -0.03em;
-  color: #fff;
-  display: flex;
-  align-items: center;
-}
-.nav-logo .logo-ovo { color: var(--electric); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.65);
-  transition: color 0.15s;
-}
-.nav-links a:hover { color: #fff; }
-
+.nav-logo { font-family: var(--ff-head); font-weight: 800; font-size: 1.2rem; color: #fff; letter-spacing: -0.02em; }
+.nav-logo span { color: var(--blue); }
+.nav-links { display: none; }
 .nav-cta {
-  background: var(--electric) !important;
-  color: #fff !important;
-  padding: 9px 22px;
-  border-radius: 5px;
-  font-weight: 600 !important;
-  font-size: 0.875rem !important;
-  transition: background 0.15s !important;
-}
-.nav-cta:hover { background: var(--electric-l) !important; color: #fff !important; }
-
-.nav-mobile-cta {
-  display: none;
-  background: var(--electric);
-  color: #fff;
-  padding: 9px 18px;
-  border-radius: 5px;
-  font-weight: 600;
-  font-size: 0.875rem;
+  background: var(--blue); color: #fff;
+  padding: 8px 16px; border-radius: 6px;
+  font-size: 0.875rem; font-weight: 600;
 }
 
-@media (max-width: 720px) {
-  .nav-links { display: none; }
-  .nav-mobile-cta { display: block; }
-}
-
-/* ── HERO ────────────────────────────────────────────── */
+/* ── HERO ────────────────────────────────────────────────── */
 .hero {
-  background: var(--bg);
-  color: var(--fg);
-  padding: clamp(56px, 8vw, 110px) clamp(16px, 5vw, 72px) clamp(56px, 8vw, 100px);
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 56px;
-  align-items: center;
+  padding: 48px 20px 44px;
   border-bottom: 1px solid var(--border);
 }
-
 .hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  display: inline-flex; align-items: center; gap: 8px;
   border: 1px solid rgba(26,86,219,0.3);
   background: rgba(26,86,219,0.06);
-  border-radius: 999px;
-  padding: 5px 14px 5px 8px;
-  margin-bottom: 32px;
-  font-size: 0.8125rem;
-  color: var(--electric);
+  border-radius: 999px; padding: 5px 14px 5px 10px;
+  font-size: 0.78rem; color: var(--blue);
+  margin-bottom: 24px;
 }
-.hero-badge-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--electric);
-  flex-shrink: 0;
-}
-
+.hero-badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
 .hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 6.5vw, 5.75rem);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  text-wrap: balance;
-  margin-bottom: 32px;
-  color: var(--fg);
+  font-family: var(--ff-head); font-size: 2.75rem;
+  font-weight: 800; line-height: 1.04; letter-spacing: -0.03em;
+  margin-bottom: 20px; color: var(--fg);
 }
-
-.hero h1 .accent { color: var(--electric); }
-
+.hero h1 .accent { color: var(--blue); }
 .hero-sub {
-  font-size: clamp(1rem, 1.4vw, 1.125rem);
-  color: var(--fg-muted);
-  max-width: 46ch;
-  line-height: 1.75;
-  margin-bottom: 44px;
+  font-size: 1rem; color: var(--fg3); line-height: 1.7;
+  margin-bottom: 32px; max-width: 52ch;
 }
-
-.hero-btns {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  align-items: center;
+.hero-btns { display: flex; flex-direction: column; gap: 12px; }
+.btn-primary {
+  display: block; text-align: center;
+  background: var(--blue); color: #fff;
+  padding: 15px 24px; border-radius: 7px;
+  font-weight: 600; font-size: 1rem;
+  border: none; cursor: pointer; font-family: var(--ff-body);
+  transition: background .15s;
 }
-
-.btn-blue {
-  background: var(--electric);
-  color: #fff;
-  padding: 14px 30px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.9375rem;
-  font-family: var(--font-body);
-  border: none;
-  cursor: pointer;
-  transition: background 0.15s;
+.btn-primary:hover { background: var(--blue-h); }
+.btn-secondary {
+  display: block; text-align: center;
+  border: 1.5px solid var(--border); color: var(--fg2);
+  padding: 14px 24px; border-radius: 7px;
+  font-weight: 500; font-size: 1rem;
+  transition: border-color .15s, color .15s;
 }
-.btn-blue:hover { background: var(--electric-l); }
+.btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
 
-.btn-outline {
-  color: var(--fg-mid);
-  padding: 14px 0;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  transition: color 0.15s;
+/* Tarjetas propuesta (solo desktop) */
+.hero-cards { display: none; }
+
+/* ── STATS STRIP ─────────────────────────────────────────── */
+.stats {
+  display: flex; flex-direction: column; gap: 1px;
+  background: var(--border);
   border-bottom: 1px solid var(--border);
 }
-.btn-outline:hover { color: var(--electric); border-color: var(--electric); }
-
-/* Right side: proposition cards */
-.hero-right {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.stat {
+  background: var(--bg); padding: 20px;
+  display: flex; align-items: center; gap: 14px;
 }
-
-.prop-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 22px 24px;
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+.stat-num {
+  font-family: var(--ff-head); font-size: 2rem; font-weight: 800;
+  color: var(--blue); line-height: 1; flex-shrink: 0;
 }
-.prop-card:hover {
-  border-color: rgba(26,86,219,0.35);
-  box-shadow: 0 4px 16px rgba(26,86,219,0.08);
-}
+.stat-label { font-size: 0.875rem; color: var(--fg2); line-height: 1.4; }
+.stat-label strong { display: block; color: var(--fg); font-weight: 600; }
 
-.prop-icon {
-  width: 42px; height: 42px;
-  border-radius: 8px;
-  background: rgba(26,86,219,0.08);
-  border: 1px solid rgba(26,86,219,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.125rem;
-  flex-shrink: 0;
-}
-
-.prop-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.9375rem;
-  color: var(--fg);
-  margin-bottom: 4px;
-}
-
-.prop-desc {
-  font-size: 0.8125rem;
-  color: var(--fg-muted);
-  line-height: 1.6;
-}
-
-@media (max-width: 880px) {
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    gap: 40px;
-  }
-  .hero-right { display: none; } /* en tablet/móvil ocultamos las tarjetas del lado derecho */
-}
-
-/* ── SECTIONS BASE ───────────────────────────────────── */
-section { padding: clamp(60px, 8vw, 108px) clamp(16px, 5vw, 72px); }
-
+/* ── SECTIONS BASE ───────────────────────────────────────── */
+.sec { padding: 52px 20px; }
+.sec.alt { background: var(--bg2); }
 .eyebrow {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--electric);
-  margin-bottom: 14px;
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 12px;
 }
-
 .sec-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.5vw, 2.875rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
-  text-wrap: balance;
-  margin-bottom: 18px;
+  font-family: var(--ff-head); font-size: 1.9rem; font-weight: 800;
+  line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 16px;
 }
+.sec-body { font-size: 0.9375rem; color: var(--fg3); line-height: 1.75; }
 
-.sec-body {
-  font-size: 1.0625rem;
-  color: var(--fg-muted);
-  max-width: 52ch;
-  line-height: 1.75;
-}
+/* ── QUÉ HACEMOS ─────────────────────────────────────────── */
+.que-body { margin-top: 20px; }
+.que-body p { font-size: 0.9375rem; color: var(--fg2); line-height: 1.75; margin-bottom: 14px; }
 
-/* ── QUÉ HACEMOS ─────────────────────────────────────── */
-.que-section { background: var(--bg); }
-
-.que-intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: start;
-  margin-bottom: 64px;
-}
-
-.que-statement {
-  font-family: var(--font-display);
-  font-size: clamp(1.375rem, 2vw, 1.875rem);
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
-  color: var(--fg);
-}
-.que-statement strong { color: var(--electric); }
-
-.que-body p {
-  color: var(--fg-mid);
-  line-height: 1.8;
-  margin-bottom: 14px;
-  font-size: 1.0625rem;
-}
-
-/* Diferenciador clave — franja destacada */
 .diferenciador {
-  background: var(--navy);
-  color: #fff;
-  border-radius: 12px;
-  padding: 32px 36px;
-  margin-top: 48px;
-  display: flex;
-  gap: 24px;
-  align-items: center;
+  margin-top: 32px; padding: 24px 20px;
+  background: var(--bg2); border-radius: var(--radius);
+  border-left: 3px solid var(--blue);
 }
-.dif-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--electric);
-  margin-bottom: 8px;
-}
-.dif-text {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-.dif-sub {
-  margin-top: 6px;
-  font-size: 0.875rem;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.6;
-}
-.dif-icon-wrap {
-  flex-shrink: 0;
-  font-size: 2.5rem;
-}
+.dif-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+.dif-text { font-family: var(--ff-head); font-size: 1.2rem; font-weight: 700; line-height: 1.3; margin-bottom: 10px; }
+.dif-sub { font-size: 0.875rem; color: var(--fg3); line-height: 1.7; }
 
-@media (max-width: 720px) {
-  .que-intro { grid-template-columns: 1fr; gap: 36px; }
-  .diferenciador { flex-direction: column; }
+.servicios-list { margin-top: 36px; display: flex; flex-direction: column; gap: 2px; background: var(--border); border-radius: var(--radius); overflow: hidden; }
+.srv {
+  background: var(--bg); padding: 22px 20px;
+  display: flex; gap: 16px; align-items: flex-start;
 }
+.srv-num { font-family: var(--ff-head); font-size: 0.72rem; font-weight: 800; color: var(--blue); flex-shrink: 0; padding-top: 3px; min-width: 24px; }
+.srv-name { font-weight: 600; font-size: 0.9375rem; margin-bottom: 6px; }
+.srv-desc { font-size: 0.875rem; color: var(--fg3); line-height: 1.65; }
 
-/* Servicios lista */
-.servicios-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-  background: var(--border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.servicio-item {
-  background: var(--surface);
-  padding: 32px 28px;
-  display: flex;
-  gap: 20px;
-}
-
-.srv-num {
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 800;
-  color: var(--electric);
-  letter-spacing: 0.05em;
-  flex-shrink: 0;
-  padding-top: 4px;
-  width: 30px;
-}
-
-.srv-name {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--fg);
-}
-
-.srv-desc {
-  font-size: 0.875rem;
-  color: var(--fg-muted);
-  line-height: 1.65;
-}
-
-@media (max-width: 680px) {
-  .servicios-grid { grid-template-columns: 1fr; }
-}
-
-/* ── SECTORES ────────────────────────────────────────── */
-.sectores-section { background: var(--bg-alt); }
-
-.sectores-head {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-  align-items: end;
-  margin-bottom: 56px;
-}
-
-@media (max-width: 680px) {
-  .sectores-head { grid-template-columns: 1fr; }
-}
-
-.sectores-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 16px;
-}
-
+/* ── SECTORES ────────────────────────────────────────────── */
+.sectores-grid { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
 .sector-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 28px 26px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+  display: flex; align-items: flex-start; gap: 14px;
+  transition: border-color .2s, box-shadow .2s;
 }
-.sector-card:hover {
-  box-shadow: 0 8px 28px rgba(0,0,0,0.07);
-  transform: translateY(-2px);
-}
-
-.sector-icon { font-size: 1.75rem; margin-bottom: 16px; }
-
-.sector-name {
-  font-family: var(--font-display);
-  font-size: 1.0625rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--fg);
-}
-
-.sector-desc {
-  font-size: 0.8125rem;
-  color: var(--fg-muted);
-  line-height: 1.65;
-}
-
+.sector-card:hover { border-color: rgba(26,86,219,.35); box-shadow: 0 2px 12px rgba(26,86,219,.07); }
+.sector-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.sector-name { font-weight: 700; font-size: 0.9375rem; margin-bottom: 4px; }
+.sector-desc { font-size: 0.84rem; color: var(--fg3); line-height: 1.6; }
 .sector-tag {
-  display: inline-block;
-  margin-top: 16px;
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--electric);
-  background: rgba(26,86,219,0.09);
-  padding: 3px 9px;
-  border-radius: 4px;
+  display: inline-block; margin-top: 8px;
+  font-size: 0.72rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px;
+  background: rgba(26,86,219,.08); color: var(--blue);
+  letter-spacing: 0.03em;
 }
 
-/* ── PROCESO ─────────────────────────────────────────── */
-.proceso-section { background: var(--bg); }
-
-.proceso-intro { max-width: 580px; margin-bottom: 64px; }
-
-.proceso-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  position: relative;
-}
-.proceso-steps::before {
-  content: '';
-  position: absolute;
-  top: 27px;
-  left: 8%;
-  right: 8%;
-  height: 1px;
-  background: var(--border);
-}
-
+/* ── PROCESO ─────────────────────────────────────────────── */
+.pasos { margin-top: 36px; display: flex; flex-direction: column; gap: 0; }
 .paso {
-  padding-right: 24px;
-  position: relative;
-  z-index: 1;
+  display: flex; gap: 16px; padding: 20px 0;
+  border-bottom: 1px solid var(--border);
 }
-
+.paso:last-child { border-bottom: none; }
 .paso-num {
-  width: 54px; height: 54px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 2px solid var(--electric);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 0.9375rem;
-  font-weight: 800;
-  color: var(--electric);
-  margin-bottom: 24px;
-  font-variant-numeric: tabular-nums;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.78rem; flex-shrink: 0; margin-top: 2px;
 }
+.paso-title { font-weight: 700; font-size: 0.9375rem; margin-bottom: 6px; }
+.paso-desc { font-size: 0.875rem; color: var(--fg3); line-height: 1.65; }
 
-.paso-title {
-  font-family: var(--font-display);
-  font-size: 1.0625rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: var(--fg);
-}
-
-.paso-desc {
-  font-size: 0.875rem;
-  color: var(--fg-muted);
-  line-height: 1.65;
-}
-
-@media (max-width: 740px) {
-  .proceso-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
-  .proceso-steps::before { display: none; }
-}
-@media (max-width: 460px) {
-  .proceso-steps { grid-template-columns: 1fr; }
-}
-
-/* ── POR QUÉ PREZOVO ─────────────────────────────────── */
-.porq-section {
-  background: var(--bg-alt);
-}
-
-.porq-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  margin-top: 52px;
-  align-items: start;
-}
-
-.porq-left p {
-  color: var(--fg-mid);
-  line-height: 1.8;
-  margin-bottom: 16px;
-  font-size: 1.0625rem;
-}
-
-.porq-puntos { display: flex; flex-direction: column; gap: 14px; }
-
+/* ── POR QUÉ ─────────────────────────────────────────────── */
+.porq-text { margin-top: 20px; }
+.porq-text p { font-size: 0.9375rem; color: var(--fg2); line-height: 1.75; margin-bottom: 12px; }
+.porq-puntos { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
 .porq-punto {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  padding: 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  display: flex; gap: 14px; padding: 18px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+  transition: border-color .2s;
 }
-.porq-punto:hover {
-  border-color: rgba(26,86,219,0.3);
-  box-shadow: 0 2px 12px rgba(26,86,219,0.07);
-}
+.porq-punto:hover { border-color: rgba(26,86,219,.3); }
+.check { width: 26px; height: 26px; border-radius: 50%; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.porq-punto strong { display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 3px; }
+.porq-punto span { font-size: 0.84rem; color: var(--fg3); line-height: 1.6; }
 
-.check-icon {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: var(--electric);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #fff;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.porq-punto strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--fg);
-  margin-bottom: 4px;
-}
-
-.porq-punto span {
-  font-size: 0.875rem;
-  color: var(--fg-muted);
-  line-height: 1.6;
-}
-
-@media (max-width: 720px) {
-  .porq-grid { grid-template-columns: 1fr; gap: 40px; }
-}
-
-/* ── MERCADOS ────────────────────────────────────────── */
-.mercados-section { background: var(--bg-alt); }
-
-.mercados-pills {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 36px;
-}
-
+/* ── MERCADOS ────────────────────────────────────────────── */
+.mercados-bloque { margin-top: 28px; }
+.mercados-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+.mercados-label.muted { color: var(--fg3); margin-top: 24px; }
+.mpills { display: flex; flex-wrap: wrap; gap: 8px; }
 .mpill {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 10px 20px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--fg-mid);
-}
-.mpill-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--electric);
-  flex-shrink: 0;
-}
-
-/* ── CONTACTO ────────────────────────────────────────── */
-.contacto-section { background: var(--bg); }
-
-.contacto-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 72px;
-  align-items: start;
-}
-
-.contacto-info p {
-  color: var(--fg-muted);
-  line-height: 1.75;
-  margin-bottom: 32px;
-  font-size: 1.0625rem;
-}
-
-.info-cards { display: flex; flex-direction: column; gap: 12px; }
-
-.info-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 18px;
-}
-
-.info-card-icon {
-  width: 36px; height: 36px;
-  border-radius: 6px;
-  background: var(--navy);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.875rem;
-  flex-shrink: 0;
-}
-
-.info-card small {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-  margin-bottom: 3px;
-}
-
-.info-card strong {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--fg);
-  user-select: all;
-}
-
-/* Form */
-.form-wrap {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 36px 32px;
-}
-
-.form-wrap h3 {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 24px;
-  color: var(--fg);
-}
-
-.contact-form { display: flex; flex-direction: column; gap: 16px; }
-
-.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
-.fwrap { display: flex; flex-direction: column; gap: 6px; }
-
-.fwrap label {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--fg-mid);
-  letter-spacing: 0.01em;
-}
-
-.fwrap input,
-.fwrap select,
-.fwrap textarea {
+  display: flex; align-items: center; gap: 7px;
+  border: 1px solid var(--border); border-radius: 999px;
+  padding: 6px 14px; font-size: 0.84rem; font-weight: 500;
   background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: 7px;
-  padding: 11px 14px;
-  font-size: 0.9375rem;
-  font-family: var(--font-body);
-  color: var(--fg);
-  outline: none;
-  transition: border-color 0.15s;
-  width: 100%;
 }
-.fwrap input:focus,
-.fwrap select:focus,
-.fwrap textarea:focus {
-  border-color: var(--electric);
-}
-.fwrap textarea { resize: vertical; min-height: 96px; }
+.mpill-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+.mpill.muted { color: var(--fg3); }
+.mpill.muted .mpill-dot { background: var(--fg3); }
 
+/* ── CONTACTO ────────────────────────────────────────────── */
+.info-items { margin-top: 28px; display: flex; flex-direction: column; gap: 10px; }
+.info-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; background: var(--bg2);
+  border: 1px solid var(--border); border-radius: 8px;
+}
+.info-icon { width: 34px; height: 34px; background: var(--navy); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; flex-shrink: 0; }
+.info-item small { display: block; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg3); margin-bottom: 2px; }
+.info-item strong { font-size: 0.9rem; font-weight: 500; }
+
+.form-card {
+  margin-top: 32px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 20px;
+}
+.form-card h3 { font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+.cform { display: flex; flex-direction: column; gap: 14px; }
+.fwrap { display: flex; flex-direction: column; gap: 5px; }
+.fwrap label { font-size: 0.8rem; font-weight: 600; color: var(--fg2); }
+.fwrap input, .fwrap select, .fwrap textarea {
+  background: var(--bg2); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 11px 14px;
+  font-size: 0.9375rem; font-family: var(--ff-body); color: var(--fg);
+  outline: none; transition: border-color .15s; width: 100%;
+}
+.fwrap input:focus, .fwrap select:focus, .fwrap textarea:focus { border-color: var(--blue); }
+.fwrap textarea { resize: vertical; min-height: 88px; }
 .form-submit {
-  background: var(--electric);
-  color: #fff;
-  border: none;
-  border-radius: 7px;
-  padding: 14px 28px;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: background 0.15s;
-  width: 100%;
-  margin-top: 4px;
+  background: var(--blue); color: #fff; border: none;
+  border-radius: 7px; padding: 14px 24px;
+  font-size: 1rem; font-weight: 600; font-family: var(--ff-body);
+  cursor: pointer; width: 100%; transition: background .15s;
 }
-.form-submit:hover { background: var(--electric-l); }
-
-.form-nota {
-  font-size: 0.8rem;
-  color: var(--fg-muted);
-  text-align: center;
-  margin-top: 4px;
-}
-
+.form-submit:hover { background: var(--blue-h); }
+.form-nota { font-size: 0.8rem; color: var(--fg3); text-align: center; margin-top: 6px; }
 .form-ok {
-  display: none;
-  background: #f0fdf4;
-  border: 1px solid #86efac;
-  border-radius: 8px;
-  padding: 24px;
-  color: #166534;
-  font-weight: 500;
-  text-align: center;
-  font-size: 1rem;
+  display: none; margin-top: 16px; padding: 18px;
+  background: #f0fdf4; border-radius: 8px;
+  color: #166534; font-weight: 500; text-align: center;
 }
 
-@media (max-width: 760px) {
-  .contacto-wrap { grid-template-columns: 1fr; gap: 48px; }
-  .frow { grid-template-columns: 1fr; }
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer {
+  background: var(--navy); color: rgba(255,255,255,.5);
+  padding: 28px 20px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.footer-logo { font-family: var(--ff-head); font-weight: 800; font-size: 1.1rem; color: #fff; }
+.footer-logo span { color: var(--blue); }
+.footer p { font-size: 0.8rem; }
+
+/* ════════════════════════════════════════════════════════════
+   TABLET  ≥ 640px
+   ════════════════════════════════════════════════════════════ */
+@media (min-width: 640px) {
+  .sec { padding: 64px 40px; }
+  .hero { padding: 60px 40px 56px; }
+  .hero h1 { font-size: 3.4rem; }
+  .hero-btns { flex-direction: row; }
+  .btn-primary, .btn-secondary { display: inline-block; }
+  .stats { flex-direction: row; }
+  .stat { flex: 1; }
+  .sectores-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .sector-card { flex-direction: column; }
+  .mercados-label.muted { margin-top: 32px; }
+  .footer { flex-direction: row; justify-content: space-between; align-items: center; padding: 28px 40px; }
 }
 
-/* ── FOOTER ──────────────────────────────────────────── */
-footer {
-  background: var(--navy);
-  color: rgba(255,255,255,0.5);
-  padding: 36px clamp(16px, 5vw, 72px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
+/* ════════════════════════════════════════════════════════════
+   DESKTOP  ≥ 1024px
+   ════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .nav { padding: 0 clamp(40px,5vw,80px); height: 68px; }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { color: rgba(255,255,255,.75); font-size: 0.9rem; transition: color .15s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-links .nav-cta { background: var(--blue); color: #fff; padding: 8px 20px; border-radius: 6px; font-weight: 600; }
+  .nav-links .nav-cta:hover { background: var(--blue-h); color: #fff; }
+  /* ocultar botón móvil en desktop */
+  .nav > .nav-cta { display: none; }
 
-.footer-logo {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: -0.03em;
-  color: #fff;
-}
-.footer-logo .logo-ovo { color: var(--electric); }
-
-footer p { font-size: 0.8125rem; }
-
-/* ══════════════════════════════════════════════════════════
-   MÓVIL — breakpoint principal ≤ 600px
-   ══════════════════════════════════════════════════════════ */
-@media (max-width: 600px) {
-
-  /* Hero */
   .hero {
-    padding: 52px 20px 48px;
-    grid-template-columns: 1fr;
-    gap: 32px;
+    padding: 90px clamp(40px,5vw,80px) 80px;
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 64px; align-items: center;
   }
-  .hero h1 {
-    font-size: 2.6rem;
-    letter-spacing: -0.03em;
-    line-height: 1.06;
-    margin-bottom: 20px;
+  .hero h1 { font-size: clamp(3rem,5vw,5rem); }
+  .hero-sub { font-size: 1.0625rem; }
+  .hero-btns { flex-direction: row; }
+  .hero-cards {
+    display: flex; flex-direction: column; gap: 14px;
   }
-  .hero-sub {
-    font-size: 1rem;
-    margin-bottom: 32px;
+  .hcard {
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    transition: border-color .2s, box-shadow .2s;
   }
-  .hero-btns {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-  .btn-blue { width: 100%; text-align: center; padding: 15px 20px; }
-  .hero-badge { font-size: 0.75rem; }
-  .hero-right { display: none; }
+  .hcard:hover { border-color: rgba(26,86,219,.35); box-shadow: 0 4px 16px rgba(26,86,219,.08); }
+  .hcard-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(26,86,219,.08); border: 1px solid rgba(26,86,219,.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .hcard-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; }
+  .hcard-desc { font-size: 0.8125rem; color: var(--fg3); line-height: 1.6; }
 
-  /* Secciones — padding reducido */
-  section { padding: 52px 20px; }
+  .stats { padding: 0 clamp(40px,5vw,80px); }
+  .stat { padding: 28px 0; }
 
-  /* Qué hacemos */
-  .que-intro { grid-template-columns: 1fr; gap: 28px; }
-  .diferenciador { flex-direction: column; gap: 12px; }
-  .servicios-grid { grid-template-columns: 1fr; }
-  .servicio-item { padding: 24px 20px; }
+  .sec { padding: 96px clamp(40px,5vw,80px); }
+  .sec-title { font-size: clamp(2rem,3.5vw,2.75rem); }
 
-  /* Sectores */
-  .sectores-head { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
-  .sectores-grid { grid-template-columns: 1fr; }
-  .sector-card { padding: 20px; }
+  /* Qué hacemos — 2 columnas intro */
+  .que-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-bottom: 48px; }
+  .que-intro .sec-title { font-size: clamp(1.75rem,3vw,2.5rem); }
+  .servicios-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 
-  /* Proceso */
-  .proceso-steps { grid-template-columns: 1fr; gap: 32px; }
-  .proceso-steps::before { display: none; }
+  /* Sectores — 3 columnas */
+  .sectores-grid { grid-template-columns: repeat(3, 1fr); }
 
-  /* Por qué Prezovo */
-  .porq-grid { grid-template-columns: 1fr; gap: 28px; }
+  /* Proceso — 4 columnas */
+  .pasos { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; }
+  .paso { flex-direction: column; border-bottom: none; border-top: 3px solid var(--border); padding: 24px 0 0; }
+  .paso-num { margin-bottom: 16px; }
 
-  /* Mercados */
-  .mercados-pills { gap: 8px; }
+  /* Por qué — 2 columnas */
+  .porq-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 40px; align-items: start; }
+  .porq-text { margin-top: 0; }
+  .porq-puntos { margin-top: 0; }
 
-  /* Contacto */
-  .contacto-wrap { grid-template-columns: 1fr; gap: 36px; }
-  .frow { grid-template-columns: 1fr; }
-  .form-wrap { padding: 24px 20px; }
+  /* Mercados — 2 columnas */
+  .mercados-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; }
+  .mercados-bloque { margin-top: 0; }
+
+  /* Contacto — 2 columnas */
+  .contacto-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+  .form-card { margin-top: 0; }
 
   /* Footer */
-  footer { flex-direction: column; align-items: flex-start; gap: 12px; text-align: left; padding: 28px 20px; }
-}
-
-/* Tablet estrecha 601–768px */
-@media (min-width: 601px) and (max-width: 768px) {
-  .hero { padding: 64px 32px 56px; }
-  .hero h1 { font-size: 3.2rem; }
-  section { padding: 64px 32px; }
-  .sectores-grid { grid-template-columns: 1fr 1fr; }
-  .contacto-wrap { grid-template-columns: 1fr; gap: 40px; }
-  .porq-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer { padding: 32px clamp(40px,5vw,80px); }
 }
 </style>
+</head>
+<body>
 
-<!-- ── NAV ── -->
-<nav>
-  <div class="nav-logo">Prez<span class="logo-ovo">ovo</span></div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Prez<span>ovo</span></div>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
     <li><a href="#sectores">Sectores</a></li>
     <li><a href="#proceso">Cómo funciona</a></li>
     <li><a href="#contacto" class="nav-cta">Hablemos</a></li>
   </ul>
-  <a href="#contacto" class="nav-mobile-cta">Contacto</a>
+  <a href="#contacto" class="nav-cta">Contacto</a>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-badge">
@@ -908,271 +374,295 @@ footer p { font-size: 0.8125rem; }
       Intermediario Comercial B2B
     </div>
     <h1>Nosotros<br>encontramos<br>al cliente.<br><span class="accent">Tú cierras.</span></h1>
-    <p class="hero-sub">Prezovo trabaja como tu equipo externo de ventas: identificamos empresas que encajan con tu perfil de cliente ideal, abrimos la conversación, la cualificamos y te entregamos la reunión ya preparada para cerrar.</p>
+    <p class="hero-sub">Prezovo trabaja como tu equipo externo de ventas: identificamos empresas que encajan con tu perfil ideal, abrimos la conversación, la cualificamos y te entregamos la reunión ya preparada para cerrar.</p>
     <div class="hero-btns">
-      <a href="#contacto"><button class="btn-blue">Solicitar reunión →</button></a>
-      <a href="#proceso" class="btn-outline">Cómo funciona ↓</a>
+      <a href="#contacto" class="btn-primary">Solicitar reunión →</a>
+      <a href="#proceso" class="btn-secondary">Cómo funciona ↓</a>
     </div>
   </div>
-
-  <div class="hero-right">
-    <div class="prop-card">
-      <div class="prop-icon">🎯</div>
+  <div class="hero-cards">
+    <div class="hcard">
+      <div class="hcard-icon">🎯</div>
       <div>
-        <div class="prop-title">Solo cobramos si entregamos</div>
-        <div class="prop-desc">Sin retainer, sin pagos anticipados. Nuestro ingreso está ligado directamente a los resultados que te generamos.</div>
+        <div class="hcard-title">Solo cobramos si entregamos</div>
+        <div class="hcard-desc">Sin retainer, sin pagos anticipados. Nuestro ingreso está ligado directamente a los resultados.</div>
       </div>
     </div>
-    <div class="prop-card">
-      <div class="prop-icon">✅</div>
+    <div class="hcard">
+      <div class="hcard-icon">✅</div>
       <div>
-        <div class="prop-title">Leads ya cualificados</div>
-        <div class="prop-desc">No enviamos listas de contactos. Entregamos reuniones concretas con decisores que ya saben quién eres y por qué merece la pena conocerte.</div>
+        <div class="hcard-title">Leads ya cualificados</div>
+        <div class="hcard-desc">Entregamos reuniones concretas con decisores que ya saben quién eres y por qué merece la pena conocerte.</div>
       </div>
     </div>
-    <div class="prop-card">
-      <div class="prop-icon">🤝</div>
+    <div class="hcard">
+      <div class="hcard-icon">🤝</div>
       <div>
-        <div class="prop-title">Volumen selectivo, no masivo</div>
-        <div class="prop-desc">Trabajamos pocos casos simultáneamente para garantizar que cada introducción tenga máximas probabilidades de cierre.</div>
+        <div class="hcard-title">Volumen selectivo, no masivo</div>
+        <div class="hcard-desc">Trabajamos pocos casos a la vez para garantizar máximas probabilidades de cierre en cada introducción.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── QUÉ HACEMOS ── -->
-<section class="que-section" id="servicios">
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label"><strong>Comisión por resultado</strong>Sin coste si no hay éxito</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">B2B</div>
+    <div class="stat-label"><strong>Solo empresas</strong>Decisores cualificados</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">🇪🇸</div>
+    <div class="stat-label"><strong>Toda España</strong>Cobertura nacional</div>
+  </div>
+</div>
+
+<!-- QUÉ HACEMOS -->
+<section class="sec" id="servicios">
   <div class="que-intro">
     <div>
       <div class="eyebrow">Qué hacemos</div>
-      <p class="que-statement">Somos el puente entre tu empresa y los clientes que <strong>necesitan lo que ofreces</strong>, pero aún no te conocen.</p>
+      <h2 class="sec-title">Somos el puente entre tu empresa y los clientes que te necesitan</h2>
     </div>
     <div class="que-body">
       <p>La mayoría de empresas con un buen servicio no tienen problemas de calidad — tienen problemas de pipeline. Llegar a los decisores correctos lleva tiempo, contactos y persistencia.</p>
-      <p>Eso es exactamente lo que hace Prezovo. Investigamos tu mercado objetivo, abrimos la conversación, filtramos el interés real y te presentamos al cliente con todo el contexto necesario para que la primera reunión ya sea una reunión de cierre.</p>
-      <p>Nuestro modelo es claro: ganamos cuando tú ganas.</p>
+      <p>Eso es exactamente lo que hace Prezovo. Investigamos tu mercado, abrimos la conversación, filtramos el interés real y te presentamos al cliente con todo el contexto necesario.</p>
+      <p><strong>Nuestro modelo es claro: ganamos cuando tú ganas.</strong></p>
     </div>
   </div>
 
   <div class="diferenciador">
-    <div class="dif-icon-wrap">🔑</div>
-    <div>
-      <div class="dif-label">La diferencia clave</div>
-      <div class="dif-text">No generamos volumen. Generamos certeza.</div>
-      <div class="dif-sub">Cada caso que llevamos adelante lo hacemos porque creemos que puede cerrarse. Si no vemos una probabilidad real de éxito, no lo aceptamos. Eso nos obliga a ser selectivos — y a ti te protege de perder tiempo con reuniones que no van a ningún sitio.</div>
-    </div>
+    <div class="dif-label">🔑 La diferencia clave</div>
+    <div class="dif-text">No generamos volumen. Generamos certeza.</div>
+    <div class="dif-sub">Cada caso que llevamos adelante lo hacemos porque creemos que puede cerrarse. Si no vemos probabilidad real de éxito, no lo aceptamos. Eso nos obliga a ser selectivos — y a ti te protege de perder tiempo con reuniones que no van a ningún sitio.</div>
   </div>
 
-  <br><br>
-
-  <div class="servicios-grid">
-    <div class="servicio-item">
+  <div class="servicios-list">
+    <div class="srv">
       <div class="srv-num">01</div>
       <div>
         <div class="srv-name">Identificación y Prospección</div>
-        <div class="srv-desc">Investigamos y mapeamos empresas en tu mercado objetivo. Definimos juntos el perfil de cliente ideal y buscamos los decisores correctos, no solo los contactos disponibles.</div>
+        <div class="srv-desc">Mapeamos empresas en tu mercado objetivo. Definimos juntos el perfil de cliente ideal y buscamos los decisores correctos, no solo los contactos disponibles.</div>
       </div>
     </div>
-    <div class="servicio-item">
+    <div class="srv">
       <div class="srv-num">02</div>
       <div>
         <div class="srv-name">Apertura y Cualificación</div>
-        <div class="srv-desc">Realizamos el primer contacto en tu nombre con un enfoque personalizado. Antes de pasarte la reunión, confirmamos presupuesto, autoridad de decisión, necesidad real y plazo.</div>
+        <div class="srv-desc">Realizamos el primer contacto en tu nombre. Antes de pasarte la reunión, confirmamos presupuesto, autoridad de decisión, necesidad real y plazo.</div>
       </div>
     </div>
-    <div class="servicio-item">
+    <div class="srv">
       <div class="srv-num">03</div>
       <div>
         <div class="srv-name">Introducción Comercial</div>
-        <div class="srv-desc">Hacemos la presentación formal entre tú y el prospecto, con contexto completo. Entras a la reunión ya con credibilidad — el cliente ya sabe quién eres y por qué merece la pena escucharte.</div>
+        <div class="srv-desc">Hacemos la presentación formal entre tú y el prospecto con contexto completo. Entras a la reunión ya con credibilidad.</div>
       </div>
     </div>
-    <div class="servicio-item">
+    <div class="srv">
       <div class="srv-num">04</div>
       <div>
         <div class="srv-name">Entrada en Nuevos Mercados</div>
-        <div class="srv-desc">¿Quieres crecer a otro país o sector? Mapeamos el terreno, identificamos los actores clave y te entregamos los contactos para aterrizar con fuerza desde el primer día.</div>
+        <div class="srv-desc">¿Quieres crecer a otro país o sector? Mapeamos el terreno, identificamos los actores clave y te entregamos los contactos para aterrizar con fuerza.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── SECTORES ── -->
-<section class="sectores-section" id="sectores">
-  <div class="sectores-head">
-    <div>
-      <div class="eyebrow">Sectores</div>
-      <h2 class="sec-title">Dónde operamos</h2>
-    </div>
-    <p class="sec-body">Nos enfocamos en sectores B2B donde las relaciones son el motor de negocio y donde una introducción de confianza marca la diferencia entre una reunión y un contrato.</p>
-  </div>
+<!-- SECTORES -->
+<section class="sec alt" id="sectores">
+  <div class="eyebrow">Sectores</div>
+  <h2 class="sec-title">Dónde operamos</h2>
+  <p class="sec-body">Nos enfocamos en sectores B2B donde las relaciones son el motor de negocio y donde una introducción de confianza marca la diferencia entre una reunión y un contrato.</p>
 
   <div class="sectores-grid">
     <div class="sector-card">
       <div class="sector-icon">✈️</div>
-      <div class="sector-name">Viajes y Eventos Corporativos</div>
-      <div class="sector-desc">Agencias especializadas en grupos corporativos, viajes de incentivo, convenciones y eventos de empresa.</div>
-      <span class="sector-tag">Modelo probado</span>
+      <div>
+        <div class="sector-name">Viajes y Eventos Corporativos</div>
+        <div class="sector-desc">Agencias especializadas en grupos corporativos, viajes de incentivo y convenciones de empresa.</div>
+        <span class="sector-tag">Modelo probado</span>
+      </div>
     </div>
     <div class="sector-card">
       <div class="sector-icon">🎓</div>
-      <div class="sector-name">Formación Empresarial</div>
-      <div class="sector-desc">Academias, escuelas de idiomas y formación ejecutiva que buscan captar empresas como clientes para formación de equipos.</div>
-      <span class="sector-tag">Recurrente</span>
+      <div>
+        <div class="sector-name">Formación Empresarial</div>
+        <div class="sector-desc">Academias, escuelas de idiomas y formación ejecutiva que buscan captar empresas para formación de equipos.</div>
+        <span class="sector-tag">Recurrente</span>
+      </div>
     </div>
     <div class="sector-card">
       <div class="sector-icon">💻</div>
-      <div class="sector-name">Software y Tecnología</div>
-      <div class="sector-desc">Productos SaaS, ERPs y herramientas digitales que necesitan apoyo comercial para vender a empresas pequeñas y medianas.</div>
-      <span class="sector-tag">Escalable</span>
+      <div>
+        <div class="sector-name">Software y Tecnología</div>
+        <div class="sector-desc">Productos SaaS, ERPs y herramientas digitales que necesitan apoyo comercial para vender a pymes.</div>
+        <span class="sector-tag">Escalable</span>
+      </div>
     </div>
     <div class="sector-card">
       <div class="sector-icon">🏗️</div>
-      <div class="sector-name">Inmobiliario B2B</div>
-      <div class="sector-desc">Agencias de inmobiliario comercial y promotores privados con clientes corporativos o compradores institucionales.</div>
-      <span class="sector-tag">Alto valor por operación</span>
+      <div>
+        <div class="sector-name">Inmobiliario B2B</div>
+        <div class="sector-desc">Agencias de inmobiliario comercial y promotores privados con clientes corporativos o institucionales.</div>
+        <span class="sector-tag">Alto valor</span>
+      </div>
     </div>
     <div class="sector-card">
       <div class="sector-icon">🛒</div>
-      <div class="sector-name">Distribución y Retail</div>
-      <div class="sector-desc">Fabricantes y distribuidores que buscan ampliar su red de clientes minoristas, mayoristas o franquiciados en España.</div>
-      <span class="sector-tag">Volumen estable</span>
+      <div>
+        <div class="sector-name">Distribución y Retail</div>
+        <div class="sector-desc">Fabricantes y distribuidores que buscan ampliar su red de clientes minoristas, mayoristas o franquiciados.</div>
+        <span class="sector-tag">Volumen estable</span>
+      </div>
     </div>
     <div class="sector-card">
       <div class="sector-icon">🌿</div>
-      <div class="sector-name">Salud y Bienestar Privado</div>
-      <div class="sector-desc">Clínicas, centros de wellness y empresas de salud corporativa que necesitan captar nuevas empresas como clientes B2B.</div>
-      <span class="sector-tag">Crecimiento sostenido</span>
+      <div>
+        <div class="sector-name">Salud y Bienestar Privado</div>
+        <div class="sector-desc">Clínicas y centros de wellness que necesitan captar nuevas empresas como clientes B2B.</div>
+        <span class="sector-tag">Crecimiento sostenido</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── PROCESO ── -->
-<section class="proceso-section" id="proceso">
-  <div class="proceso-intro">
-    <div class="eyebrow">Cómo funciona</div>
-    <h2 class="sec-title">Simple, directo y sin fricciones</h2>
-    <p class="sec-body">Funcionamos como una extensión de tu equipo comercial. Sin onboarding complejo, sin contratos largos. Un acuerdo claro, un objetivo definido y resultados.</p>
-  </div>
+<!-- PROCESO -->
+<section class="sec" id="proceso">
+  <div class="eyebrow">Cómo funciona</div>
+  <h2 class="sec-title">Simple, directo y sin fricciones</h2>
+  <p class="sec-body">Funcionamos como una extensión de tu equipo comercial. Sin onboarding complejo, sin contratos largos.</p>
 
-  <div class="proceso-steps">
+  <div class="pasos">
     <div class="paso">
       <div class="paso-num">01</div>
-      <div class="paso-title">Reunión de descubrimiento</div>
-      <div class="paso-desc">Entendemos tu negocio, tu cliente ideal, tu pipeline actual y qué significa un buen lead para ti. Sin esto no podemos ser selectivos.</div>
+      <div>
+        <div class="paso-title">Reunión de descubrimiento</div>
+        <div class="paso-desc">Entendemos tu negocio, tu cliente ideal y tu pipeline actual. Sin esto no podemos ser selectivos.</div>
+      </div>
     </div>
     <div class="paso">
       <div class="paso-num">02</div>
-      <div class="paso-desc"></div>
-      <div class="paso-title">Acuerdo comercial</div>
-      <div class="paso-desc">Definimos los criterios de cualificación, la estructura de comisiones y cómo se harán las introducciones. Acuerdo escrito simple, sin retainer.</div>
+      <div>
+        <div class="paso-title">Acuerdo comercial</div>
+        <div class="paso-desc">Definimos criterios de cualificación y estructura de comisiones. Acuerdo escrito simple, sin retainer.</div>
+      </div>
     </div>
     <div class="paso">
       <div class="paso-num">03</div>
-      <div class="paso-title">Salimos al mercado</div>
-      <div class="paso-desc">Iniciamos la prospección, la cualificación y la construcción de relaciones en tu mercado objetivo. Tú sigues enfocado en tu trabajo.</div>
+      <div>
+        <div class="paso-title">Salimos al mercado</div>
+        <div class="paso-desc">Iniciamos la prospección y cualificación en tu mercado objetivo. Tú sigues enfocado en tu negocio.</div>
+      </div>
     </div>
     <div class="paso">
       <div class="paso-num">04</div>
-      <div class="paso-title">Introducción ya preparada</div>
-      <div class="paso-desc">Cuando el prospecto está listo para hablar, hacemos la introducción formal. Tú cierras. Nosotros cobramos comisión por el resultado.</div>
+      <div>
+        <div class="paso-title">Introducción preparada</div>
+        <div class="paso-desc">Cuando el prospecto está listo, hacemos la introducción formal. Tú cierras. Nosotros cobramos comisión.</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ── POR QUÉ PREZOVO ── -->
-<section class="porq-section">
+<!-- POR QUÉ PREZOVO -->
+<section class="sec alt">
   <div class="eyebrow">Por qué Prezovo</div>
-  <div class="porq-grid">
-    <div class="porq-left">
-      <h2 class="sec-title">Incentivos<br>alineados.<br>Responsabilidad real.</h2>
+  <h2 class="sec-title">Incentivos alineados.<br>Responsabilidad real.</h2>
+
+  <div class="porq-wrap">
+    <div class="porq-text">
       <p>Contratar un equipo de ventas es caro y lento. La publicidad genera ruido, no relaciones. La mayoría de las agencias cobran retainer independientemente de los resultados.</p>
-      <p>Prezovo es diferente porque solo cobramos cuando entregamos. Eso nos mantiene honestos, enfocados y trabajando más duro que cualquier comercial asalariado.</p>
+      <p>Prezovo es diferente porque solo cobramos cuando entregamos. Eso nos mantiene honestos y trabajando más duro que cualquier comercial asalariado.</p>
       <p>Nuestra formación en Economía y Comercio Internacional nos da contexto de negocio real — no solo sabemos enviar emails en frío.</p>
     </div>
     <div class="porq-puntos">
       <div class="porq-punto">
-        <div class="check-icon">✓</div>
+        <div class="check">✓</div>
         <div>
           <strong>Sin coste inicial</strong>
-          <span>Cero retainer. Solo inviertes cuando un lead se convierte. Nuestro riesgo está ligado al tuyo.</span>
+          <span>Cero retainer. Solo inviertes cuando un lead se convierte.</span>
         </div>
       </div>
       <div class="porq-punto">
-        <div class="check-icon">✓</div>
+        <div class="check">✓</div>
         <div>
           <strong>Humano, no automatizado</strong>
-          <span>No hacemos envíos masivos. Cada empresa que contactamos recibe un acercamiento personalizado e investigado.</span>
+          <span>Cada empresa que contactamos recibe un acercamiento personalizado e investigado.</span>
         </div>
       </div>
       <div class="porq-punto">
-        <div class="check-icon">✓</div>
+        <div class="check">✓</div>
         <div>
           <strong>Visión internacional</strong>
-          <span>Operamos en toda España y atendemos clientes de EE.UU., Italia, Malta, Portugal y Francia que quieren expandirse aquí.</span>
+          <span>Operamos en toda España y atendemos clientes de EE.UU., Italia, Malta, Portugal y Francia.</span>
         </div>
       </div>
       <div class="porq-punto">
-        <div class="check-icon">✓</div>
+        <div class="check">✓</div>
         <div>
           <strong>Introducciones de confianza</strong>
-          <span>No pasamos listas de contactos. Hacemos presentaciones reales — el prospecto ya sabe quién eres antes de reunirse.</span>
+          <span>No pasamos listas. Hacemos presentaciones reales — el prospecto ya sabe quién eres antes de reunirse.</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── MERCADOS ── -->
-<section class="mercados-section">
+<!-- MERCADOS -->
+<section class="sec">
   <div class="eyebrow">Cobertura</div>
   <h2 class="sec-title">Operamos en toda España</h2>
-  <p class="sec-body" style="margin-top:12px; margin-bottom:40px;">Trabajamos con empresas en cualquier punto del territorio español — y con clientes de fuera que quieren operar o vender aquí.</p>
+  <p class="sec-body">Trabajamos con empresas en cualquier punto del territorio español — y con clientes internacionales que quieren operar o vender aquí.</p>
 
-  <div style="display:flex; flex-direction:column; gap:28px;">
-    <div>
-      <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--electric);margin-bottom:14px;">Donde operamos</p>
-      <div class="mercados-pills">
+  <div class="mercados-wrap">
+    <div class="mercados-bloque">
+      <div class="mercados-label">Donde operamos</div>
+      <div class="mpills">
         <div class="mpill"><div class="mpill-dot"></div> 🇪🇸 España — cobertura nacional</div>
       </div>
     </div>
-    <div>
-      <p style="font-size:0.75rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:14px;">Clientes que atendemos desde el extranjero</p>
-      <div class="mercados-pills">
-        <div class="mpill" style="color:var(--fg-muted);"><div class="mpill-dot" style="background:var(--fg-muted)"></div> 🇺🇸 Estados Unidos</div>
-        <div class="mpill" style="color:var(--fg-muted);"><div class="mpill-dot" style="background:var(--fg-muted)"></div> 🇮🇹 Italia</div>
-        <div class="mpill" style="color:var(--fg-muted);"><div class="mpill-dot" style="background:var(--fg-muted)"></div> 🇲🇹 Malta</div>
-        <div class="mpill" style="color:var(--fg-muted);"><div class="mpill-dot" style="background:var(--fg-muted)"></div> 🇵🇹 Portugal</div>
-        <div class="mpill" style="color:var(--fg-muted);"><div class="mpill-dot" style="background:var(--fg-muted)"></div> 🇫🇷 Francia</div>
+    <div class="mercados-bloque">
+      <div class="mercados-label muted">Clientes internacionales que atendemos</div>
+      <div class="mpills">
+        <div class="mpill muted"><div class="mpill-dot"></div> 🇺🇸 Estados Unidos</div>
+        <div class="mpill muted"><div class="mpill-dot"></div> 🇮🇹 Italia</div>
+        <div class="mpill muted"><div class="mpill-dot"></div> 🇲🇹 Malta</div>
+        <div class="mpill muted"><div class="mpill-dot"></div> 🇵🇹 Portugal</div>
+        <div class="mpill muted"><div class="mpill-dot"></div> 🇫🇷 Francia</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CONTACTO ── -->
-<section class="contacto-section" id="contacto">
+<!-- CONTACTO -->
+<section class="sec alt" id="contacto">
   <div class="contacto-wrap">
-    <div class="contacto-info">
+    <div>
       <div class="eyebrow">Contacto</div>
       <h2 class="sec-title">Cuéntanos tu negocio</h2>
-      <p>Si tienes un buen servicio y necesitas más clientes, hablemos. Evaluaremos rápidamente si podemos aportarte valor — y si es así, acordamos una estructura que funcione para los dos.</p>
-      <div class="info-cards">
-        <div class="info-card">
-          <div class="info-card-icon">✉️</div>
+      <p class="sec-body">Si tienes un buen servicio y necesitas más clientes, hablemos. Evaluaremos si podemos aportarte valor — y si es así, acordamos una estructura que funcione para los dos.</p>
+      <div class="info-items">
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
           <div>
             <small>Email</small>
             <strong>hello@prezovo.com</strong>
           </div>
         </div>
-        <div class="info-card">
-          <div class="info-card-icon">⏱</div>
+        <div class="info-item">
+          <div class="info-icon">⏱</div>
           <div>
-            <small>Tiempo de respuesta</small>
+            <small>Respuesta</small>
             <strong>Menos de 24 horas</strong>
           </div>
         </div>
-        <div class="info-card">
-          <div class="info-card-icon">🌍</div>
+        <div class="info-item">
+          <div class="info-icon">🌍</div>
           <div>
             <small>Cobertura</small>
             <strong>Toda España</strong>
@@ -1181,64 +671,55 @@ footer p { font-size: 0.8125rem; }
       </div>
     </div>
 
-    <div>
-      <div class="form-wrap">
-        <h3>Solicita una primera reunión</h3>
-        <form class="contact-form" id="contactForm">
-          <div class="frow">
-            <div class="fwrap">
-              <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" placeholder="Ana García" required>
-            </div>
-            <div class="fwrap">
-              <label for="empresa">Empresa</label>
-              <input type="text" id="empresa" placeholder="Bufete García & Asociados" required>
-            </div>
-          </div>
-          <div class="fwrap">
-            <label for="email">Email corporativo</label>
-            <input type="email" id="email" placeholder="ana@garcialaw.com" required>
-          </div>
-          <div class="fwrap">
-            <label for="sector">Sector</label>
-            <select id="sector">
-              <option value="">Selecciona tu sector…</option>
-              <option>Viajes y Eventos Corporativos</option>
-              <option>Formación Empresarial</option>
-              <option>Software y Tecnología</option>
-              <option>Inmobiliario B2B</option>
-              <option>Distribución y Retail</option>
-              <option>Salud y Bienestar Privado</option>
-              <option>Otro sector</option>
-              <option>Otro</option>
-            </select>
-          </div>
-          <div class="fwrap">
-            <label for="mensaje">Cuéntanos tu situación</label>
-            <textarea id="mensaje" placeholder="¿Cuál es tu cliente ideal? ¿Dónde está el cuello de botella en tu captación actual?" required></textarea>
-          </div>
-          <button type="submit" class="form-submit">Enviar mensaje →</button>
-          <p class="form-nota">Sin compromiso. Te respondemos con una valoración honesta.</p>
-        </form>
-        <div class="form-ok" id="formOk">
-          ✅ Mensaje recibido. Te escribimos en menos de 24 horas.
+    <div class="form-card">
+      <h3>Solicita una primera reunión</h3>
+      <form class="cform" id="cForm">
+        <div class="fwrap">
+          <label>Nombre y empresa</label>
+          <input type="text" placeholder="Ana García — Empresa SL" required>
         </div>
-      </div>
+        <div class="fwrap">
+          <label>Email corporativo</label>
+          <input type="email" placeholder="ana@empresa.com" required>
+        </div>
+        <div class="fwrap">
+          <label>Sector</label>
+          <select>
+            <option value="">Selecciona tu sector…</option>
+            <option>Viajes y Eventos Corporativos</option>
+            <option>Formación Empresarial</option>
+            <option>Software y Tecnología</option>
+            <option>Inmobiliario B2B</option>
+            <option>Distribución y Retail</option>
+            <option>Salud y Bienestar Privado</option>
+            <option>Otro sector</option>
+          </select>
+        </div>
+        <div class="fwrap">
+          <label>Cuéntanos tu situación</label>
+          <textarea placeholder="¿Cuál es tu cliente ideal? ¿Dónde está el cuello de botella en tu captación actual?" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Enviar mensaje →</button>
+        <p class="form-nota">Sin compromiso. Te respondemos con una valoración honesta.</p>
+      </form>
+      <div class="form-ok" id="formOk">✅ Mensaje recibido. Te escribimos en menos de 24 horas.</div>
     </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="footer-logo">Prez<span class="logo-ovo">ovo</span></div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">Prez<span>ovo</span></div>
   <p>© 2026 Prezovo · Intermediario Comercial B2B · España</p>
   <p>hello@prezovo.com</p>
 </footer>
 
 <script>
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
+  document.getElementById('cForm').addEventListener('submit', function(e) {
     e.preventDefault();
     this.hidden = true;
     document.getElementById('formOk').style.display = 'block';
   });
 </script>
+</body>
+</html>
