@@ -166,12 +166,12 @@ nav {
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 5.5vw, 4.75rem);
+  font-size: clamp(3rem, 6.5vw, 5.75rem);
   font-weight: 800;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
   text-wrap: balance;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   color: var(--fg);
 }
 
@@ -935,21 +935,9 @@ footer p { font-size: 0.8125rem; }
 
   <div class="sectores-grid">
     <div class="sector-card">
-      <div class="sector-icon">⚖️</div>
-      <div class="sector-name">Servicios Jurídicos</div>
-      <div class="sector-desc">Despachos de abogados, notarías y consultoras legales que buscan clientes en derecho mercantil, inmobiliario o internacional.</div>
-      <span class="sector-tag">Comisión alta</span>
-    </div>
-    <div class="sector-card">
-      <div class="sector-icon">🏢</div>
-      <div class="sector-name">Consultoría Empresarial</div>
-      <div class="sector-desc">Consultoras de gestión, asesoría financiera y estrategia para pymes y empresas de tamaño medio en busca de nuevos clientes corporativos.</div>
-      <span class="sector-tag">Volumen estable</span>
-    </div>
-    <div class="sector-card">
       <div class="sector-icon">✈️</div>
       <div class="sector-name">Viajes y Eventos Corporativos</div>
-      <div class="sector-desc">Agencias especializadas en grupos corporativos, viajes de incentivo, convenciones y viajes de fin de curso.</div>
+      <div class="sector-desc">Agencias especializadas en grupos corporativos, viajes de incentivo, convenciones y eventos de empresa.</div>
       <span class="sector-tag">Modelo probado</span>
     </div>
     <div class="sector-card">
@@ -959,16 +947,28 @@ footer p { font-size: 0.8125rem; }
       <span class="sector-tag">Recurrente</span>
     </div>
     <div class="sector-card">
+      <div class="sector-icon">💻</div>
+      <div class="sector-name">Software y Tecnología</div>
+      <div class="sector-desc">Productos SaaS, ERPs y herramientas digitales que necesitan apoyo comercial para vender a empresas pequeñas y medianas.</div>
+      <span class="sector-tag">Escalable</span>
+    </div>
+    <div class="sector-card">
       <div class="sector-icon">🏗️</div>
       <div class="sector-name">Inmobiliario B2B</div>
-      <div class="sector-desc">Agencias de inmobiliario comercial, promotores y gestores de activos con clientes corporativos, inversores o compradores institucionales.</div>
+      <div class="sector-desc">Agencias de inmobiliario comercial y promotores privados con clientes corporativos o compradores institucionales.</div>
       <span class="sector-tag">Alto valor por operación</span>
     </div>
     <div class="sector-card">
-      <div class="sector-icon">💻</div>
-      <div class="sector-name">Software para Pymes</div>
-      <div class="sector-desc">Productos SaaS, ERPs y herramientas digitales que necesitan apoyo comercial para vender a empresas pequeñas y medianas.</div>
-      <span class="sector-tag">Escalable</span>
+      <div class="sector-icon">🛒</div>
+      <div class="sector-name">Distribución y Retail</div>
+      <div class="sector-desc">Fabricantes y distribuidores que buscan ampliar su red de clientes minoristas, mayoristas o franquiciados en España.</div>
+      <span class="sector-tag">Volumen estable</span>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">🌿</div>
+      <div class="sector-name">Salud y Bienestar Privado</div>
+      <div class="sector-desc">Clínicas, centros de wellness y empresas de salud corporativa que necesitan captar nuevas empresas como clientes B2B.</div>
+      <span class="sector-tag">Crecimiento sostenido</span>
     </div>
   </div>
 </section>
@@ -1129,12 +1129,13 @@ footer p { font-size: 0.8125rem; }
             <label for="sector">Sector</label>
             <select id="sector">
               <option value="">Selecciona tu sector…</option>
-              <option>Servicios Jurídicos</option>
-              <option>Consultoría Empresarial</option>
               <option>Viajes y Eventos Corporativos</option>
               <option>Formación Empresarial</option>
-              <option>Inmobiliario</option>
-              <option>Software / SaaS</option>
+              <option>Software y Tecnología</option>
+              <option>Inmobiliario B2B</option>
+              <option>Distribución y Retail</option>
+              <option>Salud y Bienestar Privado</option>
+              <option>Otro sector</option>
               <option>Otro</option>
             </select>
           </div>
